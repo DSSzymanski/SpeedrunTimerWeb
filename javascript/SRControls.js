@@ -62,25 +62,25 @@ let resetClick = () => {
 
 let startTimer = () => {
 	timerInterval = setInterval(() => {
-		let hours = document.getElementById('hrs');
-		let mins = document.getElementById('mins');
-		let secs = document.getElementById('secs');
-		let timeElapsed = (Date.now() - startTime) + storedTime;
+		let timeDiv = document.getElementById('time');
 
-		let hr = Math.floor(timeElapsed / toHrs);
-		timeElapsed -= hr * toHrs;
-		hours.innerText = formatTime(hr);
+		//get time in arr format [hours, minutes, seconds]
+		let time = formatTimeString((Date.now() - startTime) + storedTime);
 
-		let min = Math.floor(timeElapsed / toMins);
-		timeElapsed -= min * toMins;
-		mins.innerText = formatTime(min);
-
-		let sec = Math.floor(timeElapsed / 1000);
-		secs.innerText = formatTime(sec);
+		timeDiv.innerText = time;
 	}, timeIntMS);
 }
 
-let formatTime = (val) => {
+let formatTimeString = (timeInMS) => {
+	let hr = Math.floor(timeInMS / toHrs);
+	timeInMS -= hr * toHrs;
+	let min = Math.floor(timeInMS / toMins);
+	timeInMS -= min * toMins;
+	let sec = Math.floor(timeInMS / 1000);
+	return "" + addZeroes(hr) + ":" + addZeroes(min) + ":" + addZeroes(sec);
+}
+
+let addZeroes = (val) => {
 	if(val / 10 < 1) {
 		return '0' + val;
 	}

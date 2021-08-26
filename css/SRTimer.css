@@ -8,6 +8,12 @@
 	justify-content: center;
 }
 
+#bestContainer {
+	display: flex;
+	justify-content: flex-end;
+	flex-direction: row;
+}
+
 #splitContainer {
 	display:  flex;
 }
