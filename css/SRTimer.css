@@ -3,6 +3,11 @@
 	text-align: center;
 }
 
+#timeContainer {
+	display:  flex;
+	justify-content: center;
+}
+
 #splitContainer {
 	display:  flex;
 }
