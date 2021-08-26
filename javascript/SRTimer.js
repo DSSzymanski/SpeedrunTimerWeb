@@ -25,6 +25,7 @@ let stopClick = () => {
 	let btn = document.getElementById('mainBtn');
 	btn.innerText = 'Start';
 	btn.onclick = startClick;
+	clearInterval(timerInterval);
 }
 
 let startTimer = () => {
