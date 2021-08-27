@@ -6,10 +6,6 @@ var storedTime = 0;
 var timerInterval;
 //const used for interval increments
 const timeIntMS = 100;
-//convert ms to hrs
-const toHrs = 3600 * 1000;
-//convert ms to mins
-const toMins = 60 * 1000;
 
 let startClick = () => {
 	let btn = document.getElementById('mainBtn');
@@ -21,6 +17,8 @@ let startClick = () => {
 
 let splitClick = () => {
 	console.log(Date.now() - startTime);
+	let test = formatTimeString(Date.now() - startTime);
+	console.log(formatTimeMS(test));
 }
 
 let stopClick = () => {
@@ -28,6 +26,7 @@ let stopClick = () => {
 	btn.innerText = 'Start';
 	btn.onclick = startClick;
 	clearInterval(timerInterval);
+	calculateBestTime(document.getElementById('time'), document.getElementById('btime'));
 	storedTime = 0;
 }
 
@@ -58,6 +57,12 @@ let resetClick = () => {
 	let pauseBtn = document.getElementById('pauseBtn');
 	pauseBtn.innerText = 'Pause';
 	pauseBtn.onclick = pauseClick;
+
+	let btn = document.getElementById('mainBtn');
+	btn.innerText = 'Start';
+	btn.onclick = startClick;
+
+	document.getElementById('time').innerText = "00:00:00";
 }
 
 let startTimer = () => {
@@ -69,20 +74,4 @@ let startTimer = () => {
 
 		timeDiv.innerText = time;
 	}, timeIntMS);
-}
-
-let formatTimeString = (timeInMS) => {
-	let hr = Math.floor(timeInMS / toHrs);
-	timeInMS -= hr * toHrs;
-	let min = Math.floor(timeInMS / toMins);
-	timeInMS -= min * toMins;
-	let sec = Math.floor(timeInMS / 1000);
-	return "" + addZeroes(hr) + ":" + addZeroes(min) + ":" + addZeroes(sec);
-}
-
-let addZeroes = (val) => {
-	if(val / 10 < 1) {
-		return '0' + val;
-	}
-	return val;
 }
